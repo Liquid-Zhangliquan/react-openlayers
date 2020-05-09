@@ -1,6 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as ol from 'openlayers';
+import {
+  Icon,
+  Style
+} from 'ol/style';
 
 export class MarkerStyle {
   src: string = 'https://openlayers.org/en/latest/examples/data/icon.png';
@@ -9,19 +12,19 @@ export class MarkerStyle {
     this.src = src;
   }
 
-  style = new ol.style.Style({
-    image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+  style = new Style({
+    image: new Icon(/** @type {olx.style.IconOptions} */({
       src: this.src
     }))
   });
 
-  selectStyleFunction = (feature)  => {
-    return new ol.style.Style({
-      image: new ol.style.Icon({
-          anchor: [0.5, 0.96],
-          color: '#4271AE',
-          src: 'https://openlayers.org/en/latest/examples/data/dot.png'
-        })
+  selectStyleFunction = (feature) => {
+    return new Style({
+      image: new Icon({
+        anchor: [0.5, 0.96],
+        color: '#4271AE',
+        src: 'https://openlayers.org/en/latest/examples/data/dot.png'
+      })
     })
   };
 }

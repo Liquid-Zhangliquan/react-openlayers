@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {Util} from '../util';
-import {Map} from '../map';
+import { Util } from '../util';
+import { Map } from 'ol';
+import MousePosition, { Options } from 'ol/control/MousePosition';
 
-export class MousePosition extends React.Component<any, any> {
+export class ReactOlMousePosition extends React.Component<any, any> {
 
-  control: ol.control.MousePosition;
+  control: MousePosition;
 
-  options: any = {
+  options: Options = {
     className: undefined,
     coordinateFormat: undefined,
     projection: undefined,
@@ -27,20 +27,20 @@ export class MousePosition extends React.Component<any, any> {
 
   render() { return null; }
 
-  componentDidMount () {
+  componentDidMount() {
     let options = Util.getOptions(Object['assign'](this.options, this.props));
-    this.control = new ol.control.MousePosition(options);
+    this.control = new MousePosition(options);
     this.context.mapComp.controls.push(this.control)
 
     let olEvents = Util.getEvents(this.events, this.props);
-    for(let eventName in olEvents) {
+    for (let eventName in olEvents) {
       this.control.on(eventName, olEvents[eventName]);
     }
   }
 
 }
 
-MousePosition['contextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map),
-  map: React.PropTypes.instanceOf(ol.Map)
+ReactOlMousePosition['contextTypes'] = {
+  mapComp: React.PropTypes.instanceOf(Object),
+  map: React.PropTypes.instanceOf(Map)
 };

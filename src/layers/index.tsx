@@ -1,22 +1,19 @@
-import {Tile} from './tile';
-import {Vector} from './vector';
-import {Layers} from './layers';
-import {Heatmap} from './heatmap';
-import {Image} from './image';
-import {VectorTile} from './vector-tile';
+import { ReactOlTile } from './tile';
+import { ReactOlVector } from './vector';
+import { Layers } from './layers';
+import { ReactOlHeatmap } from './heatmap';
+import { ReactOlImage } from './image';
+import { ReactOlVectorTile } from './vector-tile';
 
 let layer = {
-  Tile: Tile,
-  Vector: Vector,
-  Heatmap: Heatmap,
-  Image: Image,
-  VectorTile: VectorTile,
+  Tile: ReactOlTile,
+  Vector: ReactOlVector,
+  Heatmap: ReactOlHeatmap,
+  Image: ReactOlImage,
+  VectorTile: ReactOlVectorTile,
 };
 
-export { 
+export {
   Layers,
-  layer,
-  Heatmap,
-  Image,
-  VectorTile
+  layer
 };

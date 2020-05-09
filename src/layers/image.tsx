@@ -1,13 +1,14 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {Util} from "../util";
-import {Map} from '../map';
+import { Util } from "../util";
+import { Map } from 'ol';
+import Image from 'ol/layer/Image';
+import { Options } from 'ol/layer/BaseImage'
 
-export class Image extends React.Component<any, any> {
+export class ReactOlImage extends React.Component<any, any> {
 
-  layer: ol.layer.Image;
+  layer: Image;
 
-  options: any = {
+  options: Options = {
     opacity: undefined,
     source: undefined,
     visible: undefined,
@@ -32,50 +33,50 @@ export class Image extends React.Component<any, any> {
     'render': undefined
   };
 
-  constructor(props) { 
+  constructor(props) {
     super(props);
   }
 
   render() { return null; }
 
-  componentDidMount () {
+  componentDidMount() {
     let options = Util.getOptions(Object['assign'](this.options, this.props));
-    this.layer = new ol.layer.Image(options);
-    if(this.props.zIndex){
+    this.layer = new Image(options);
+    if (this.props.zIndex) {
       this.layer.setZIndex(this.props.zIndex);
     }
     this.context.mapComp.layers.push(this.layer);
 
     let olEvents = Util.getEvents(this.events, this.props);
-    for(let eventName in olEvents) {
+    for (let eventName in olEvents) {
       this.layer.on(eventName, olEvents[eventName]);
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if(nextProps !== this.props){
+  componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props) {
       let options = Util.getOptions(Object.assign(this.options, this.props));
       this.context.mapComp.map.removeLayer(this.layer);
-      this.layer = new ol.layer.Image(options);
-      if(this.props.zIndex){
+      this.layer = new Image(options);
+      if (this.props.zIndex) {
         this.layer.setZIndex(this.props.zIndex);
       }
       this.context.mapComp.map.addLayer(this.layer);
 
       let olEvents = Util.getEvents(this.events, this.props);
-      for(let eventName in olEvents) {
+      for (let eventName in olEvents) {
         this.layer.on(eventName, olEvents[eventName]);
       }
     }
   }
-  
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     this.context.mapComp.map.removeLayer(this.layer);
   }
 
 }
 
-Image['contextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map),
-  map: React.PropTypes.instanceOf(ol.Map)
+ReactOlImage['contextTypes'] = {
+  mapComp: React.PropTypes.instanceOf(Object),
+  map: React.PropTypes.instanceOf(Map)
 };

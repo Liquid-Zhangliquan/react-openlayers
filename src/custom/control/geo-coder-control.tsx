@@ -1,25 +1,26 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {GeoCoder} from 'geo-coder';
+import { GeoCoder } from 'geo-coder';
+import Control from 'ol/control/Control';
+import { transform } from 'ol/proj'
 
 import './geo-coder.css';
 
 let element: HTMLElement = document.createElement('div');
 
-export class GeoCoderControl extends ol.control.Control {
+export class GeoCoderControl extends Control {
   geoCoder: GeoCoder;
   eventListeners: any = {};
   expanded: boolean = false;
   buttonEl: HTMLButtonElement;
-  autocompleteEl:  HTMLDivElement;
+  autocompleteEl: HTMLDivElement;
 
   constructor(options = {}) {
-    super({element: element});
+    super({ element: element });
     this.geoCoder = new GeoCoder(options);
-    element.innerHTML=''; //it may contain the previous element
+    element.innerHTML = ''; //it may contain the previous element
     element.className = 'ol-control geo-coder';
     element.appendChild(this.buttonEl = this.getButtonHTML());
-    element.appendChild(this.autocompleteEl  = this.getAutocompleteHTML());
+    element.appendChild(this.autocompleteEl = this.getAutocompleteHTML());
   }
 
   on(eventName: string, listener: Function, option?: Object): any {
@@ -30,7 +31,7 @@ export class GeoCoderControl extends ol.control.Control {
   locate = (options: any) => {
     let lonLat: [number, number] = [parseFloat(options.lon), parseFloat(options.lat)];
     let projection = this.getMap().getView().getProjection();
-    let coord = ol.proj.transform(lonLat, 'EPSG:4326', projection);
+    let coord = transform(lonLat, 'EPSG:4326', projection);
     let view = this.getMap().getView();
     let duration = options.duration || 500;
     let resolution = options.resolution || 2.388657133911758;

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {Util} from "../util";
-import {Map} from '../map';
+import { Util } from "../util";
+import { Map } from 'ol';
+import VectorTile, { Options } from 'ol/layer/VectorTile';
 
-export class VectorTile extends React.Component<any, any> {
+export class ReactOlVectorTile extends React.Component<any, any> {
 
-  layer: ol.layer.Vector;
+  layer: VectorTile;
 
-  options: any = {
+  options: Options = {
     renderBuffer: undefined,
     renderMode: undefined,
     renderOrder: undefined,
@@ -48,50 +48,44 @@ export class VectorTile extends React.Component<any, any> {
     return null;
   }
 
-  componentDidMount () {
+  componentDidMount() {
     let options = Util.getOptions(Object.assign(this.options, this.props));
-    this.layer = new ol.layer.VectorTile(options);
-    if (this.options.callback) {
-      this.options.callback(this.layer);
-    }
-    if(this.props.zIndex){
+    this.layer = new VectorTile(options);
+    if (this.props.zIndex) {
       this.layer.setZIndex(this.props.zIndex);
     }
     this.context.mapComp.layers.push(this.layer);
-    
+
     let olEvents = Util.getEvents(this.events, this.props);
-    for(let eventName in olEvents) {
+    for (let eventName in olEvents) {
       this.layer.on(eventName, olEvents[eventName]);
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if(nextProps !== this.props){
+  componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props) {
       let options = Util.getOptions(Object.assign(this.options, this.props));
       this.context.mapComp.map.removeLayer(this.layer);
-      this.layer = new ol.layer.VectorTile(options);
-      if (this.options.callback) {
-        this.options.callback(this.layer);
-      }
-      if(this.props.zIndex){
+      this.layer = new VectorTile(options);
+      if (this.props.zIndex) {
         this.layer.setZIndex(this.props.zIndex);
       }
       this.context.mapComp.map.addLayer(this.layer);
 
       let olEvents = Util.getEvents(this.events, this.props);
-      for(let eventName in olEvents) {
+      for (let eventName in olEvents) {
         this.layer.on(eventName, olEvents[eventName]);
       }
     }
   }
-  
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     this.context.mapComp.map.removeLayer(this.layer);
   }
 
 }
 
-VectorTile['contextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map),
-  map: React.PropTypes.instanceOf(ol.Map)
+ReactOlVectorTile['contextTypes'] = {
+  mapComp: React.PropTypes.instanceOf(Object),
+  map: React.PropTypes.instanceOf(Map)
 };

@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as ol from 'openlayers';
+import { Stamen } from 'ol/source';
+import { transform } from 'ol/proj';
 import {
   interaction, layer, custom, control, //name spaces
   Interactions, Overlays, Controls,     //group
@@ -8,17 +9,17 @@ import {
 } from "../../src/index";
 
 //AppOverlay to avoid conflict to Overlay
-export class AppOverlay extends React.Component<any,any> {
+export class AppOverlay extends React.Component<any, any> {
   overlayComp: any;
   popupComp: any;
 
   constructor(props) {
     super(props);
-  } 
+  }
 
   showPopup = (evt) => {
     this.overlayComp.overlay.setPosition(evt.coordinate);
-    var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+    var lonlat = transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
 
     this.popupComp.setContents(
       `<p>You clicked here:</p><code> ${lonlat[0]}, ${lonlat[1]}</code>`
@@ -26,12 +27,12 @@ export class AppOverlay extends React.Component<any,any> {
     this.popupComp.show();
   }
 
-  render(){
+  render() {
     return (
       <div>
         <Map onClick={this.showPopup}>
           <Layers>
-            <layer.Tile source={new ol.source.Stamen({ layer: 'watercolor' })}/>
+            <layer.Tile source={new Stamen({ layer: 'watercolor' })} />
           </Layers>
           <Overlays>
             <Overlay ref={comp => this.overlayComp = comp}>
@@ -44,7 +45,7 @@ export class AppOverlay extends React.Component<any,any> {
         <pre>{`
         <Map onClick={this.showPopup}>
           <Layers>
-            <layer.Tile source={new ol.source.Stamen({ layer: 'watercolor' })}/>
+            <layer.Tile source={new Stamen({ layer: 'watercolor' })}/>
           </Layers>
           <Overlays>
             <Overlay ref={comp => this.overlayComp = comp}>

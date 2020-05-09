@@ -1,20 +1,19 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
 
 import './popup.css';
 
 export class Popup extends React.Component<any, any> {
   containerEl: HTMLElement;
   contentEl: HTMLElement;
-  contentClose:HTMLElement;
+  contentClose: HTMLElement;
 
   constructor(props) {
     super(props);
   }
 
-  componentDidMount(){
-    this.contentClose.addEventListener("click",()=>{
-      this.containerEl.style.display='none';
+  componentDidMount() {
+    this.contentClose.addEventListener("click", () => {
+      this.containerEl.style.display = 'none';
     });
   }
 

@@ -1,16 +1,19 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {Util} from './util';
-import {Layers} from './layers/layers';
-import {layer} from './layers/index';
+import { Map } from 'ol';
+import View, { ViewOptions } from 'ol/View';
+import { defaults as ControlDefault } from 'ol/control';
+import { defaults as interactionDefault } from 'ol/interaction';
+import { Util } from './util';
+import { Layers } from './layers/layers';
+import { layer } from './layers/index';
 
 import './ol.css';
 import './map.css';
-import {Controls} from "./controls";
-import {Interactions} from "./interactions";
+import { ReactOlControls as Controls } from "./controls/controls";
+import { Interactions } from "./interactions";
 
 /**
- * Implementation of ol.map https://openlayers.org/en/latest/apidoc/ol.Map.html
+ * Implementation of ol.map https://openlayers.org/en/latest/apidoc/Map.html
  *
  * example:
  * <Map view={{center: [0, 0], zoom: 1}}>
@@ -23,9 +26,9 @@ import {Interactions} from "./interactions";
  *   <overlays></overlays>
  * </Map>
  */
-export class Map extends React.Component<any, any> {
+export class ReactOlMap extends React.Component<any, any> {
 
-  map: ol.Map;
+  map: Map;
   mapDiv: any;
 
   layers: any[] = [];
@@ -45,7 +48,7 @@ export class Map extends React.Component<any, any> {
     setCenter: undefined,
     setZoom: undefined,
     setResolution: undefined,
-    view: new ol.View({center: [0, 0], zoom: 3}),
+    view: new View({ center: [0, 0], zoom: 3 }),
     controls: undefined,
     interactions: undefined,
     layers: undefined,
@@ -81,41 +84,41 @@ export class Map extends React.Component<any, any> {
 
   componentDidMount() {
     let options = Util.getOptions(Object.assign(this.options, this.props));
-    !(options.view instanceof ol.View) && (options.view = new ol.View(options.view));
+    !(options.view instanceof View) && (options.view = new View(options.view));
 
     let controlsCmp = Util.findChild(this.props.children, Controls) || {};
     let interactionsCmp = Util.findChild(this.props.children, Interactions) || {};
 
-    options.controls = ol.control.defaults(controlsCmp.props).extend(this.controls);
-    options.interactions = ol.interaction.defaults(interactionsCmp.props).extend(this.interactions);
+    options.controls = ControlDefault(controlsCmp.props).extend(this.controls);
+    options.interactions = interactionDefault(interactionsCmp.props).extend(this.interactions);
 
     options.layers = this.layers;
     options.overlays = this.overlays;
     console.log('map options', options);
 
-    this.map = new ol.Map(options);
+    this.map = new Map(options);
     this.map.setTarget(options.target || this.mapDiv);
 
     //regitster events
     let olEvents = Util.getEvents(this.events, this.props);
-    for(let eventName in olEvents) {
+    for (let eventName in olEvents) {
       this.map.on(eventName, olEvents[eventName]);
     }
   }
   // update the view with new props
   /* Modified by Harinder Randhawa */
   componentWillReceiveProps(nextProps) {
-    if(this.props.view && nextProps.view.center !== this.props.view.center){
+    if (this.props.view && nextProps.view.center !== this.props.view.center) {
       this.map.getView().setCenter(nextProps.view.center);
     }
-    if(this.props.view && nextProps.view.zoom !== this.props.view.zoom){
+    if (this.props.view && nextProps.view.zoom !== this.props.view.zoom) {
       this.map.getView().setZoom(nextProps.view.zoom);
     }
   }
 
   render() {
     return (
-      <div className="openlayers-map" ref={(el)=> this.mapDiv = el}>
+      <div className="openlayers-map" ref={(el) => this.mapDiv = el}>
         {this.props.children}
       </div>
     );
@@ -149,7 +152,7 @@ export class Map extends React.Component<any, any> {
 }
 
 // Ref. https://facebook.github.io/react/docs/context.html#how-to-use-context
-Map['childContextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map),
-  map: React.PropTypes.instanceOf(ol.Map)
+ReactOlMap['childContextTypes'] = {
+  mapComp: React.PropTypes.instanceOf(Object),
+  map: React.PropTypes.instanceOf(Map)
 };

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
 import { Util } from "../util";
-import { Map } from '../map';
+import { Map } from 'ol';
+import Heatmap, { Options } from 'ol/layer/Heatmap';
 
-export class Heatmap extends React.Component<any, any> {
+export class ReactOlHeatmap extends React.Component<any, any> {
 
-  layer: ol.layer.Heatmap;
+  layer: Heatmap;
 
-  options: any = {
+  options: Options = {
     gradient: undefined,
     radius: undefined,
     blur: undefined,
@@ -45,8 +45,8 @@ export class Heatmap extends React.Component<any, any> {
 
   componentDidMount() {
     let options = Util.getOptions(Object['assign'](this.options, this.props));
-    this.layer = new ol.layer.Heatmap(options);
-    if(this.props.zIndex){
+    this.layer = new Heatmap(options);
+    if (this.props.zIndex) {
       this.layer.setZIndex(this.props.zIndex);
     }
     this.context.mapComp.layers.push(this.layer);
@@ -61,7 +61,7 @@ export class Heatmap extends React.Component<any, any> {
     if (nextProps !== this.props) {
       let options = Util.getOptions(Object.assign(this.options, this.props));
       this.context.mapComp.map.removeLayer(this.layer);
-      this.layer = new ol.layer.Heatmap(options);
+      this.layer = new Heatmap(options);
       if (this.props.zIndex) {
         this.layer.setZIndex(this.props.zIndex);
       }
@@ -80,7 +80,7 @@ export class Heatmap extends React.Component<any, any> {
 
 }
 
-Heatmap['contextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map),
-  map: React.PropTypes.instanceOf(ol.Map)
+ReactOlHeatmap['contextTypes'] = {
+  mapComp: React.PropTypes.instanceOf(Object),
+  map: React.PropTypes.instanceOf(Map)
 };

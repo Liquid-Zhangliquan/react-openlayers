@@ -1,52 +1,53 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as ol from 'openlayers';
+import { Vector as VectorSource, Cluster, Stamen } from 'ol/source';
+import KML from 'ol/format/KML';
 import {
   interaction, layer, custom, control, //name spaces
   Interactions, Overlays, Controls,     //group
   Map, Layers, Overlay, Util    //objects
 } from "../../src/index";
 
-var vectorSource= new ol.source.Cluster({
+var vectorSource = new Cluster({
   distance: 40,
-  source: new ol.source.Vector({
+  source: new VectorSource({
     url: 'https://openlayers.org/en/latest/examples/kml-earthquakes.html',
-    format: new ol.format.KML({
+    format: new KML({
       extractStyles: false
     })
   })
 });
 
-var tileSource = new ol.source.Stamen({
+var tileSource = new Stamen({
   layer: 'toner'
 });
 
-var selectCondition = function(evt) {
+var selectCondition = function (evt) {
   return evt.originalEvent.type == 'mousemove' ||
     evt.type == 'singleclick';
 };
 
 var cluster = new custom.style.ClusterStyle(vectorSource);
 
-export class EarthquakeClusters extends React.Component<any,any> {
+export class EarthquakeClusters extends React.Component<any, any> {
   constructor(props) {
     super(props);
   }
 
-  render(){
+  render() {
     return (
       <div>
-        <Map view={{center: [0,0], zoom:2}}>
+        <Map view={{ center: [0, 0], zoom: 2 }}>
           <Interactions>
             <interaction.Select
-             condition={selectCondition} 
-             style={cluster.selectStyleFunction} />
+              condition={selectCondition}
+              style={cluster.selectStyleFunction} />
           </Interactions>
           <Layers>
-            <layer.Tile source={tileSource}/>
-            <layer.Vector 
-              source={vectorSource} 
-              style={cluster.vectorStyleFunction}/>
+            <layer.Tile source={tileSource} />
+            <layer.Vector
+              source={vectorSource}
+              style={cluster.vectorStyleFunction} />
           </Layers>
         </Map>
         <a href="https://github.com/allenhwkim/react-openlayers/blob/master/app/custom/earthquake-clusters.tsx">source</a>

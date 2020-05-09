@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {Util} from "../util";
-import {Map} from '../map';
+import { Util } from "../util";
+import Map from 'ol/Map';
+import Draw, { Options } from 'ol/interaction/Draw';
 
-export class Draw extends React.Component<any, any> {
+export class ReactOlDraw extends React.Component<any, any> {
 
-  interaction: ol.interaction.Draw;
+  interaction: Draw;
 
-  options: any = {
+  options: Options = {
     clickTolerance: undefined,
     features: undefined,
     source: undefined,
@@ -37,38 +37,38 @@ export class Draw extends React.Component<any, any> {
 
   render() { return null; }
 
-  componentDidMount () {
+  componentDidMount() {
     let options = Util.getOptions(Object['assign'](this.options, this.props));
-    this.interaction = new ol.interaction.Draw(options);
+    this.interaction = new Draw(options);
     this.context.mapComp.interactions.push(this.interaction);
 
     let olEvents = Util.getEvents(this.events, this.props);
-    for(let eventName in olEvents) {
+    for (let eventName in olEvents) {
       this.interaction.on(eventName, olEvents[eventName]);
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if(nextProps !== this.props){
+  componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props) {
       this.context.mapComp.map.removeInteraction(this.interaction);
       let options = Util.getOptions(Object['assign'](this.options, nextProps));
-      this.interaction = new ol.interaction.Draw(options);
+      this.interaction = new Draw(options);
       this.context.mapComp.map.addInteraction(this.interaction);
 
       let olEvents = Util.getEvents(this.events, this.props);
-      for(let eventName in olEvents) {
+      for (let eventName in olEvents) {
         this.interaction.on(eventName, olEvents[eventName]);
       }
     }
   }
-  
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     this.context.mapComp.map.removeInteraction(this.interaction);
   }
 
 }
 
-Draw['contextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map),
-  map: React.PropTypes.instanceOf(ol.Map)
+ReactOlDraw['contextTypes'] = {
+  mapComp: React.PropTypes.instanceOf(Object),
+  map: React.PropTypes.instanceOf(Map)
 };

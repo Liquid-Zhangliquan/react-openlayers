@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {Util} from '../util';
-import {Map} from '../map';
+import { Util } from '../util';
+import { Map } from 'ol';
+import ScaleLine, { Options } from 'ol/control/ScaleLine';
 
-export class ScaleLine extends React.Component<any, any> {
+export class ReactOlScaleLine extends React.Component<any, any> {
 
-  control: ol.control.ScaleLine;
+  control: ScaleLine;
 
-  options: any = {
+  options: Options = {
     className: undefined,
     minWidth: undefined,
     render: undefined,
@@ -25,20 +25,20 @@ export class ScaleLine extends React.Component<any, any> {
 
   render() { return null; }
 
-  componentDidMount () {
+  componentDidMount() {
     let options = Util.getOptions(Object.assign(this.options, this.props));
-    this.control = new ol.control.ScaleLine(options);
+    this.control = new ScaleLine(options);
     this.context.mapComp.controls.push(this.control)
 
     let olEvents = Util.getEvents(this.events, this.props);
-    for(let eventName in olEvents) {
+    for (let eventName in olEvents) {
       this.control.on(eventName, olEvents[eventName]);
     }
   }
 
 }
 
-ScaleLine['contextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map),
-  map: React.PropTypes.instanceOf(ol.Map)
+ReactOlScaleLine['contextTypes'] = {
+  mapComp: React.PropTypes.instanceOf(Object),
+  map: React.PropTypes.instanceOf(Map)
 };

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["es5", "es6", "dom"],
+    "lib": [
+      "es5",
+      "es6",
+      "dom"
+    ],
     "module": "commonjs",
     "isolatedModules": false,
     "moduleResolution": "node",
@@ -24,16 +28,18 @@
     "outDir": "dist",
     "baseUrl": "src",
     "paths": {
-      "react-openlayers": ["./index"]
+      "react-openlayers": [
+        "./index"
+      ]
     }
   },
   "types": [
-    "openlayers",
+    "ol",
     "googlemaps"
   ],
   "files": [
     "src/index.tsx",
-    "node_modules/@types/openlayers/index.d.ts"
+    "node_modules/@types/ol/index.d.ts"
   ],
   "exclude": [
     "node_modules"

@@ -1,6 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as ol from 'openlayers';
+import {
+  OSM,
+  Vector
+} from 'ol/source';
 import {
   interaction, layer, custom, control, //name spaces
   Interactions, Overlays, Controls,     //group
@@ -9,9 +12,9 @@ import {
 
 
 
-var rasterTile = new ol.source.OSM();
+var rasterTile = new OSM();
 
-var vectorSource = new ol.source.Vector({wrapX: false});
+var vectorSource = new Vector({ wrapX: false });
 
 export class Draw extends React.Component<any, any> {
   constructor(props) {
@@ -46,13 +49,13 @@ export class Draw extends React.Component<any, any> {
               type={this.state.interactionType} />
           </Interactions>
         </Map>
-        <select onChange={(event) => this.setState({interactionType: event.target.value})} value={this.state.interactionType}>
+        <select onChange={(event) => this.setState({ interactionType: event.target.value })} value={this.state.interactionType}>
           <option value="Point">Point</option>
           <option value="Polygon">Polygon</option>
           <option value="Line">Line</option>
           <option value="Circle">Circle</option>
         </select>
-        <br/>
+        <br />
         <a href="https://github.com/allenhwkim/react-openlayers/blob/master/app/interactions/draw.tsx">source</a>
         <pre>{`
         `}</pre>

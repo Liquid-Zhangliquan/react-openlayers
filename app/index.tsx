@@ -1,8 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as ol from 'openlayers';
-import {Router, Route, hashHistory, IndexRoute} from 'react-router';
-import {App} from './app';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { App } from './app';
 
 import {
   Controls,
@@ -14,7 +13,7 @@ import {
   ScaleLine,
   ZoomSlider,
   ZoomToExtent,
-  Zoom 
+  Zoom
 } from './controls'
 
 import {
@@ -30,7 +29,7 @@ import {
 
 import {
   Interactions,
-  Select, 
+  Select,
   Draw,
   Modify,
   DoubleClickZoom,
@@ -51,7 +50,7 @@ import {
 } from './interactions';
 
 import {
-  Overlays, 
+  Overlays,
   AppOverlay
 } from './overlays';
 

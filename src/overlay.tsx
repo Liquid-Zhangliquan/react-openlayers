@@ -1,15 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as ol from 'openlayers';
-import {Util} from './util';
-import {Map} from './Map';
+import { Util } from './util';
+import { Map } from 'ol';
+import Overlay, { Options } from 'ol/Overlay';
 
-export class Overlay extends React.Component<any, any> {
+export class ReactOlOverlay extends React.Component<any, any> {
 
-  overlay: ol.Overlay;
+  overlay: Overlay;
   el: HTMLElement;
 
-  options: any = {
+  options: Options = {
     id: undefined,
     element: undefined,
     offset: undefined,
@@ -39,16 +39,16 @@ export class Overlay extends React.Component<any, any> {
     );
   }
 
-  componentDidMount () {
-    let options = Util.getOptions( Object['assign'](this.options, this.props));
+  componentDidMount() {
+    let options = Util.getOptions(Object['assign'](this.options, this.props));
     options.element = ReactDOM.findDOMNode(this).querySelector('div');
     // console.log('options.element', options.element);
-    this.overlay = new ol.Overlay(options);
+    this.overlay = new Overlay(options);
     this.context.mapComp.overlays.push(this.overlay);
   }
 }
 
-Overlay['contextTypes'] = {
+ReactOlOverlay['contextTypes'] = {
   mapComp: React.PropTypes.instanceOf(Object),
-  map: React.PropTypes.instanceOf(ol.Map)
+  map: React.PropTypes.instanceOf(Map)
 };

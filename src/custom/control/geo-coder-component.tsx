@@ -1,8 +1,7 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {GeoCoderControl} from './geo-coder-control';
-import {Util} from '../../util';
-import {Map} from '../../map';
+import { GeoCoderControl } from './geo-coder-control';
+import { Util } from '../../util';
+import { Map } from 'ol';
 
 export class GeoCoderComponent extends React.Component<any, any> {
 
@@ -20,20 +19,20 @@ export class GeoCoderComponent extends React.Component<any, any> {
 
   constructor(props) { super(props); }
 
-  render() { 
+  render() {
     return (<div>{this.props.children}</div>);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     let options = Util.getOptions(Object['assign'](this.options, this.props));
     this.control = new GeoCoderControl(options);
     this.geoCoder = this.control.geoCoder;
     this.context.mapComp.controls.push(this.control)
     this.geoCoder = this.control.geoCoder;
-    
+
     //regitster events
     let olEvents = Util.getEvents(this.events, this.props);
-    for(let eventName in olEvents) {
+    for (let eventName in olEvents) {
       this.control.on(eventName, olEvents[eventName]);
     }
 
@@ -42,6 +41,6 @@ export class GeoCoderComponent extends React.Component<any, any> {
 }
 
 GeoCoderComponent['contextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map),
-  map: React.PropTypes.instanceOf(ol.Map)
+  mapComp: React.PropTypes.instanceOf(Object),
+  map: React.PropTypes.instanceOf(Map)
 };

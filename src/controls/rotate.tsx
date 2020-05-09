@@ -1,16 +1,16 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {Util} from '../util';
-import {Map} from '../map';
+import { Util } from '../util';
+import { Map } from 'ol';
+import Rotate, { Options } from 'ol/control/Rotate';
 
-export class Rotate extends React.Component<any, any> {
+export class ReactOlRotate extends React.Component<any, any> {
 
-  control: ol.control.Rotate;
+  control: Rotate;
 
-  options: any = {
+  options: Options = {
     className: undefined,
     label: undefined,
-    tipLabel  : undefined,
+    tipLabel: undefined,
     duration: undefined,
     autoHide: undefined,
     render: undefined,
@@ -27,20 +27,20 @@ export class Rotate extends React.Component<any, any> {
 
   render() { return null; }
 
-  componentDidMount () {
+  componentDidMount() {
     let options = Util.getOptions(Object['assign'](this.options, this.props));
-    this.control = new ol.control.Rotate(options);
+    this.control = new Rotate(options);
     this.context.mapComp.controls.push(this.control)
 
     let olEvents = Util.getEvents(this.events, this.props);
-    for(let eventName in olEvents) {
+    for (let eventName in olEvents) {
       this.control.on(eventName, olEvents[eventName]);
     }
   }
 
 }
 
-Rotate['contextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map),
-  map: React.PropTypes.instanceOf(ol.Map)
+ReactOlRotate['contextTypes'] = {
+  mapComp: React.PropTypes.instanceOf(Object),
+  map: React.PropTypes.instanceOf(Map)
 };

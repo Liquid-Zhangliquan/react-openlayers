@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {Util} from "../util";
-import {Map} from '../map';
+import { Util } from "../util";
+import Map from 'ol/Map';
+import Modify, { Options } from 'ol/interaction/Modify';
 
-export class Modify extends React.Component<any, any> {
+export class ReactOlModify extends React.Component<any, any> {
 
-  interaction: ol.interaction.Modify;
+  interaction: Modify;
 
-  options: any = {
+  options: Options = {
     condition: undefined,
     deleteCondition: undefined,
     pixelTolerance: undefined,
@@ -28,39 +28,39 @@ export class Modify extends React.Component<any, any> {
 
   render() { return null; }
 
-  componentDidMount () {
+  componentDidMount() {
     let options = Util.getOptions(Object['assign'](this.options, this.props));
     console.log('options', options);
-    this.interaction = new ol.interaction.Modify(options);
+    this.interaction = new Modify(options);
     this.context.mapComp.interactions.push(this.interaction);
-    
+
     let olEvents = Util.getEvents(this.events, this.props);
-    for(let eventName in olEvents) {
+    for (let eventName in olEvents) {
       this.interaction.on(eventName, olEvents[eventName]);
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if(nextProps !== this.props){
+  componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props) {
       this.context.mapComp.map.removeInteraction(this.interaction);
       let options = Util.getOptions(Object['assign'](this.options, nextProps));
-      this.interaction = new ol.interaction.Modify(options);
+      this.interaction = new Modify(options);
       this.context.mapComp.map.addInteraction(this.interaction);
 
       let olEvents = Util.getEvents(this.events, this.props);
-      for(let eventName in olEvents) {
+      for (let eventName in olEvents) {
         this.interaction.on(eventName, olEvents[eventName]);
       }
     }
   }
-  
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     this.context.mapComp.map.removeInteraction(this.interaction);
   }
 
 }
 
-Modify['contextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map),
-  map: React.PropTypes.instanceOf(ol.Map)
+ReactOlModify['contextTypes'] = {
+  mapComp: React.PropTypes.instanceOf(Object),
+  map: React.PropTypes.instanceOf(Map)
 };

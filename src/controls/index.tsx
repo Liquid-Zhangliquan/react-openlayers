@@ -1,27 +1,27 @@
-import {ScaleLine} from './scale-line';
-import {Attribution} from './attribution';
-import {FullScreen} from './full-screen';
-import {MousePosition} from './mouse-position';
-import {OverviewMap} from './overview-map';
-import {Rotate} from './rotate';
-import {ZoomSlider} from './zoom-slider';
-import {ZoomToExtent} from './zoom-to-extent';
-import {Zoom} from './zoom';
-import {Controls} from './controls';
+import { ReactOlScaleLine } from './scale-line';
+import { ReactOlAttribution } from './attribution';
+import { ReactOlFullScreen } from './full-screen';
+import { ReactOlMousePosition } from './mouse-position';
+import { ReactOlOverviewMap } from './overview-map';
+import { ReactOlRotate } from './rotate';
+import { ReactOlZoomSlider } from './zoom-slider';
+import { ReactOlZoomToExtent } from './zoom-to-extent';
+import { ReactOlZoom } from './zoom';
 
-let control = {
-  ScaleLine: ScaleLine,
-  Attribution: Attribution,
-  FullScreen: FullScreen,
-  MousePosition: MousePosition,
-  OverviewMap: OverviewMap,
-  Rotate: Rotate,
-  ZoomSlider: ZoomSlider,
-  ZoomToExtent: ZoomToExtent,
-  Zoom: Zoom
+export const control = {
+  ScaleLine: ReactOlScaleLine,
+  Attribution: ReactOlAttribution,
+  FullScreen: ReactOlFullScreen,
+  MousePosition: ReactOlMousePosition,
+  OverviewMap: ReactOlOverviewMap,
+  Rotate: ReactOlRotate,
+  ZoomSlider: ReactOlZoomSlider,
+  ZoomToExtent: ReactOlZoomToExtent,
+  Zoom: ReactOlZoom
 };
 
-export { 
-  Controls,
-  control
-};
+
+// export {
+//   Controls,
+//   control
+// };

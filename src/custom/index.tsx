@@ -1,9 +1,9 @@
-import {Popup} from './popup';
-import {GoogleStreetViewPanorama} from './google-street-view-panorama';
-import {ClusterStyle} from './style/cluster-style';
-import {MarkerStyle} from './style/marker-style';
-import {GeoCoderControl} from './control/geo-coder-control';
-import {GeoCoderComponent} from './control/geo-coder-component';
+import { Popup } from './popup';
+import { GoogleStreetViewPanorama } from './google-street-view-panorama';
+import { ClusterStyle } from './style/cluster-style';
+import { MarkerStyle } from './style/marker-style';
+import { GeoCoderControl } from './control/geo-coder-control';
+import { GeoCoderComponent } from './control/geo-coder-component';
 
 let custom = {
   style: {
@@ -18,5 +18,5 @@ let custom = {
   GoogleStreetViewPanorama: GoogleStreetViewPanorama
 };
 
-export {custom};
+export { custom };
 

@@ -1,13 +1,15 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
-import {Util} from '../util';
-import {Map} from '../map';
+import { Util } from '../util';
+import { Map } from 'ol';
+import Tile from 'ol/layer/Tile';
+import { Options } from 'ol/layer/BaseTile';
+import OSM from 'ol/source/OSM'
 
-export class Tile extends React.Component<any, any> {
+export class ReactOlTile extends React.Component<any, any> {
 
-  layer: ol.layer.Tile;
+  layer: Tile;
 
-  options: any = {
+  options: Options = {
     zIndex: undefined,
     opacity: undefined,
     preload: undefined,
@@ -46,46 +48,46 @@ export class Tile extends React.Component<any, any> {
     console.log('Tile render() .....');
   }
 
-  componentDidMount () {
+  componentDidMount() {
     console.log('Tile componentDidMount() .....');
     let options = Util.getOptions(Object.assign(this.options, this.props));
-    options.source = options.source || new ol.source.OSM();
-    this.layer = new ol.layer.Tile(options);
-    if(this.props.zIndex){
+    options.source = options.source || new OSM();
+    this.layer = new Tile(options);
+    if (this.props.zIndex) {
       this.layer.setZIndex(this.props.zIndex);
     }
     this.context.mapComp.layers.push(this.layer)
 
     let olEvents = Util.getEvents(this.events, this.props);
-    for(let eventName in olEvents) {
+    for (let eventName in olEvents) {
       this.layer.on(eventName, olEvents[eventName]);
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     console.log('Tile componentWillReceiveProps() .....');
-    if(nextProps !== this.props){
+    if (nextProps !== this.props) {
       let options = Util.getOptions(Object.assign(this.options, this.props));
       this.context.mapComp.map.removeLayer(this.layer);
-      this.layer = new ol.layer.Tile(options);
-      if(this.props.zIndex){
+      this.layer = new Tile(options);
+      if (this.props.zIndex) {
         this.layer.setZIndex(this.props.zIndex);
       }
       this.context.mapComp.map.addLayer(this.layer);
 
       let olEvents = Util.getEvents(this.events, this.props);
-      for(let eventName in olEvents) {
+      for (let eventName in olEvents) {
         this.layer.on(eventName, olEvents[eventName]);
       }
     }
   }
-  
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     this.context.mapComp.map.removeLayer(this.layer);
   }
 
 }
 
-Tile['contextTypes'] = {
-  mapComp: React.PropTypes.instanceOf(Map)
+ReactOlTile['contextTypes'] = {
+  mapComp: React.PropTypes.instanceOf(Object)
 };

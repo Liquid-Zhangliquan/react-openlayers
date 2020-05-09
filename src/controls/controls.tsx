@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as ol from 'openlayers';
+import { Map } from 'ol';
 
-import {Util} from '../util';
+import { Util } from '../util';
 
 // I wish I can name it as 'layers', not 'Layers'
-export class Controls extends React.Component<any, any> {
+export class ReactOlControls extends React.Component<any, any> {
 
   options: any = {
-    attribution  : undefined,
+    attribution: undefined,
     attributionOptions: undefined,
     rotate: undefined,
     rotateOptions: undefined,
@@ -24,11 +24,11 @@ export class Controls extends React.Component<any, any> {
     return (<div>{this.props.children}</div>);
   }
 
-  componentDidMount () {} 
+  componentDidMount() { }
 
-  componentWillUnmount () {}
+  componentWillUnmount() { }
 }
 
-Controls['contextTypes'] = {
-  map: React.PropTypes.instanceOf(ol.Map)
+ReactOlControls['contextTypes'] = {
+  map: React.PropTypes.instanceOf(Map)
 };
