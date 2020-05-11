@@ -1,10 +1,12 @@
 # react-openlayers
 
 A minimal [React](https://facebook.github.io/react/) 
-wrapper of [OpenLayers 3+](https://openlayers.org/)
+wrapper of [OpenLayers 5+](https://openlayers.org/)
 written in [TypeScript](https://www.typescriptlang.org/)
 
-[![image](http://i.imgur.com/5JQcT8G.png)](https://rawgit.com/allenhwkim/react-openlayers/master/app/index.html)
+# Thanks
+    
+[React-ol3](https://github.com/allenhwkim/react-openlayers) 
 
 ## Install
 
@@ -52,15 +54,10 @@ Example
 
 It strictly follows [OpenLayers 3+ API documention](https://openlayers.org/en/latest/apidoc/)
 
-## About Author
-Allen Kim is the creator of [ngmap](https://github.com/allenhwkim/angularjs-google-maps) and
-[ng2-map](https://github.com/ng2-ui/ng2-map).
-
-If you like this, you may also like [geo-coder](https://github.com/allenhwkim/geocoder).
 
 ### To start
 
-    $ git clone https://github.com/allenhwkim/react-openlayers.git
+    $ git clone https://github.com/Liquid-Zhangliquan/react-openlayers.git
     $ cd react-openlayers
     $ npm install
     $ npm start

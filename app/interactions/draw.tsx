@@ -56,7 +56,7 @@ export class Draw extends React.Component<any, any> {
           <option value="Circle">Circle</option>
         </select>
         <br />
-        <a href="https://github.com/allenhwkim/react-openlayers/blob/master/app/interactions/draw.tsx">source</a>
+        <a href="https://github.com/Liquid-Zhangliquan/react-openlayers/blob/master/app/interactions/draw.tsx">source</a>
         <pre>{`
         `}</pre>
       </div>

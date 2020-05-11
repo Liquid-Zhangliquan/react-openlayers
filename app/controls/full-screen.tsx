@@ -12,14 +12,14 @@ export class FullScreen extends React.Component<any, any> {
   render() {
     return (
       <div>
-        <a href="https://github.com/allenhwkim/react-openlayers/blob/master/app/controls/full-screen.tsx">source</a>
+        <a href="https://github.com/Liquid-Zhangliquan/react-openlayers/blob/master/app/controls/full-screen.tsx">source</a>
         <Map>
           <Layers><layer.Tile /></Layers>
           <Controls>
             <control.FullScreen />
           </Controls>
         </Map>
-        <a href="https://github.com/allenhwkim/react-openlayers/blob/master/app/controls/full-screen.tsx">source</a>
+        <a href="https://github.com/Liquid-Zhangliquan/react-openlayers/blob/master/app/controls/full-screen.tsx">source</a>
         <pre>{`
         <Map>
           <Layers><layer.Tile/></Layers>

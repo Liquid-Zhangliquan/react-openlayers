@@ -31,7 +31,7 @@ export class MarkerStyle extends React.Component<any, any> {
               source={source} />
           </Layers>
         </Map>
-        <a href="https://github.com/allenhwkim/react-openlayers/blob/master/app/custom/marker-style.tsx">source</a>
+        <a href="https://github.com/Liquid-Zhangliquan/react-openlayers/blob/master/app/custom/marker-style.tsx">source</a>
         <pre>{`
         <Map>
           <Layers>

@@ -16,13 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/allenhwkim/react-openlayers.git"
+    "url": "git+https://github.com/Liquid-Zhangliquan/react-openlayers.git"
   },
-  "author": "Allen Kim<allenhwkim@gmail.com>",
+  "author": "Liquid<1063754495@qq.com>",
   "bugs": {
-    "url": "https://github.com/allenhwkim/react-openlayers/issues"
+    "url": "https://github.com/Liquid-Zhangliquan/react-openlayers/issues"
   },
-  "homepage": "https://github.com/allenhwkim/react-openlayers#readme",
+  "homepage": "https://github.com/Liquid-Zhangliquan/react-openlayers#readme",
   "keywords": [
     "openlayer",
     "typescript",

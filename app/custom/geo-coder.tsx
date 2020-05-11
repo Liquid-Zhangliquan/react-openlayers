@@ -53,7 +53,7 @@ export class GeoCoder extends React.Component<any, any> {
   render() {
     return (
       <div>
-        This uses <a href="https://github.com/allenhwkim/geocoder">geo-coder;</a>
+        This uses <a href="https://github.com/Liquid-Zhangliquan/geocoder">geo-coder;</a>
         <Map onClick={this.showPopup}>
           <Layers>
             <layer.Tile />
@@ -77,7 +77,7 @@ export class GeoCoder extends React.Component<any, any> {
             </Overlay>
           </Overlays>
         </Map>
-        <a href="https://github.com/allenhwkim/react-openlayers/blob/master/app/custom/geo-coder.tsx">source</a>
+        <a href="https://github.com/Liquid-Zhangliquan/react-openlayers/blob/master/app/custom/geo-coder.tsx">source</a>
         <pre>{`
         `}</pre>
       </div>

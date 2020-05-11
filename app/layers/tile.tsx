@@ -20,7 +20,7 @@ export class Tile extends React.Component<any, any> {
             <layer.Tile source={new Stamen({ layer: 'watercolor' })} />
           </Layers>
         </Map>
-        <a href="https://github.com/allenhwkim/react-openlayers/blob/master/app/layers/tile.tsx">Source Code</a>
+        <a href="https://github.com/Liquid-Zhangliquan/react-openlayers/blob/master/app/layers/tile.tsx">Source Code</a>
         <pre>{`
         <Map>
           <Layers>

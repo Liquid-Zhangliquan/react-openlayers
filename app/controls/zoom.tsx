@@ -20,7 +20,7 @@ export class Zoom extends React.Component<any, any> {
             <control.Zoom />
           </Controls>
         </Map>
-        <a href="https://github.com/allenhwkim/react-openlayers/blob/master/app/controls/zoom.tsx">source</a>
+        <a href="https://github.com/Liquid-Zhangliquan/react-openlayers/blob/master/app/controls/zoom.tsx">source</a>
         <pre>{`
         <Map>
           <Layers><layer.Tile/></Layers>
